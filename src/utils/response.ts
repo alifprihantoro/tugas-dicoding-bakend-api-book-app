@@ -1,51 +1,64 @@
-import { routersType, routerBodyTypes } from '../types/book'
+import { IncomingMessage, ServerResponse } from 'http'
+import { routersType, routerBodyTypes, routersReturnType } from '../types/book'
 
 export default class responseApi {
   private routers: routersType[]
   private method: string
-  private request: string
+  private request: IncomingMessage
+  private url: string
+  private res: ServerResponse
 
-  constructor(response: any, routers: routersType[], request: any) {
-    const { method } = request
-
+  constructor(response: ServerResponse, routers: routersType[], request: IncomingMessage) {
+    const { method, url } = request
     this.routers = routers
-    this.method = method
+    this.method = method as string
     this.request = request
+    this.url = url as string
+    this.res = response
 
-    const { code, body } = this.cekMethod()
-    response.statusCode = code
-    response.end(JSON.stringify(body))
+    this.responseToClien()
   }
-  cekMethod() {
-    const isMethotEmpety = this.method === undefined
-    console.log(this.method)
-    console.log(isMethotEmpety)
-    const method = this.routers.map((data) => data.method)
-    let code: number[] = []
-    let body: routerBodyTypes[] = []
+
+  // response to client
+  responseToClien(): void {
+    const isMethotEmpety: boolean = this.method === undefined
+    const method: string[] = this.routers.map((data) => data.method)
+    let code_: number[] = []
+    let body_: routerBodyTypes[] = []
+
+    // show info user get/post on were
+    console.info(this.method + ':' + this.url)
+
+    // cek method
     for (let i = 0; i < method.length; i++) {
-      if (method[i] === this.method) {
-        code.push(this.routers[i].return(this.request).code)
-        body.push(this.routers[i].return(this.request).body)
+      // kusus untuk get
+      if ('GET' === this.method) {
+        const { code, body } = this.routers[i].return(this.request) as routersReturnType
+        code_.push(code)
+        body_.push(body)
         break
+      }
+      // selain get
+      if (method[i] === this.method) {
+        this.routers[i].return(this.request, this.res)
+        return
       }
     }
     // method not found
-    console.log(this.method)
-    
     if (isMethotEmpety) {
-      code.push(404)
-      body.push({
+      code_.push(404)
+      body_.push({
         msg: `Harap masukkan method saat pengambilan api`,
       })
-    } 
-    const isMethotGood = code.toString() === ''
+    }
+    const isMethotGood: boolean = code_.toString() === ''
     if (isMethotGood) {
-      code.push(404)
-      body.push({
+      code_.push(404)
+      body_.push({
         msg: `Halaman tidak dapat diakses dengan ${this.method} request`,
       })
     }
-    return { code: code[0], body: body[0] }
+    this.res.statusCode = code_[0]
+    this.res.end(JSON.stringify(body_[0]))
   }
 }

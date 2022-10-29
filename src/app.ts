@@ -1,7 +1,7 @@
 import * as http from 'http'
 import {requestListener} from './routers/main-router'
 
-let server = http.createServer(requestListener)
+export let server = http.createServer(requestListener)
 
 const port = 5000
 const host = 'localhost'

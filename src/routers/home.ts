@@ -1,12 +1,13 @@
-import showBook from '../controller/showBook'
+import { IncomingMessage, ServerResponse } from 'http'
+import home from '../controller/home'
 import responseApi from '../utils/response'
 
 export default class homeRouter {
-  constructor(request: Request, response: Response) {
+  constructor(request: IncomingMessage, response: ServerResponse) {
     const routers = [
       {
         method: 'GET',
-        return: showBook,
+        return: home,
       },
     ]
     new responseApi(response, routers, request)
