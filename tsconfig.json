@@ -1,22 +1,27 @@
 {
   "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "sourceMap": true,
-        "outDir": "./dist",
-        "rootDir": "./src",
-        /* Strict Type-Checking Options */
-        "strict": true,
-        "noImplicitAny": true,
-        /* Module Resolution Options */
-        "moduleResolution": "node",
-        "baseUrl": "./src",
-        "esModuleInterop": true,
-        /* Advanced Options */
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
-    },
-    "lib": ["es2020"],
-    "include": ["src/**/*"],
-    "exclude": ["node_modules"]
+    "target": "es5",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ],
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    /* Module Resolution Options */
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    /* Advanced Options */
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "lib": ["es2015", "dom"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

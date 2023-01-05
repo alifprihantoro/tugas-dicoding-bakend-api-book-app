@@ -1,8 +1,8 @@
-import { postBook, routersReturnType } from '../types/book'
+import getDbBook from 'utils/getBookList'
+import { putBody, routerDataBookTypes, routersReturnType } from '../types/book'
 import postBookList from '../utils/postBook'
-import { randomUUID } from 'crypto'
 
-export default function cekBodyPostBook(data: postBook): routersReturnType {
+export default function cekBodyPostBook(data: putBody): routersReturnType {
   const cekData = [
     { name: 'name', type: 'string', require: true },
     { name: 'year', type: 'number', require: true },
@@ -23,10 +23,16 @@ export default function cekBodyPostBook(data: postBook): routersReturnType {
   })
   let errMsg: string[] = []
   if (data.name?.length < 1 || data.name === undefined) {
-    errMsg.push('Gagal menambahkan buku. Mohon isi nama buku')
+    errMsg.push('Gagal memperbarui buku. Mohon isi nama buku')
   }
   if (data.readPage > data.pageCount || data.readPage === undefined) {
-    errMsg.push('Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount')
+    errMsg.push('Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount')
+  }
+  const db = getDbBook() as routerDataBookTypes[]
+  const idBook = data.id
+  const isIdFalid = db.some((data_db) => data_db.id === idBook)
+  if (!isIdFalid) {
+    errMsg.push('Gagal memperbarui buku. Id tidak ditemukan')
   }
   if (err.length > 0 || errMsg.length > 0) {
     return {
@@ -40,24 +46,19 @@ export default function cekBodyPostBook(data: postBook): routersReturnType {
   }
   const errServer = []
   // write to db.json
-  const id = randomUUID()
   try {
-    const insertedAt = new Date().toISOString()
     const updatedAt = new Date().toISOString()
-    data.finished = false
-    data.id = id
-    data.insertedAt = insertedAt
     data.updatedAt = updatedAt
     postBookList(data)
   } catch (error) {
-    errServer.push('Buku gagal ditambahkan')
+    errServer.push('Buku gagal diperbarui')
   }
   if (errServer.length === 1) {
     return {
       code: 500,
       body: {
         status: 'error',
-        msg: 'Buku gagal ditambahkan',
+        msg: errServer[0],
       },
     }
   }
@@ -65,10 +66,7 @@ export default function cekBodyPostBook(data: postBook): routersReturnType {
     code: 201,
     body: {
       status: 'success',
-      msg: 'Buku berhasil ditambahkan',
-      data: {
-        bookId: id,
-      },
+      msg: 'Buku berhasil diperbarui',
     },
   }
 }
