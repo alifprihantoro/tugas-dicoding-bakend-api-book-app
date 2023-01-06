@@ -1,6 +1,6 @@
 import getDbBook from '../utils/getBookList'
 import { putBody, routerDataBookTypes, routersReturnType } from '../types/book'
-import postBookList from '../utils/postBook'
+import putDbBook from '../utils/putBook'
 
 export default function cekBodyPostBook(data: putBody, requestUrl: string): routersReturnType {
   const db = getDbBook() as routerDataBookTypes[]
@@ -55,7 +55,7 @@ export default function cekBodyPostBook(data: putBody, requestUrl: string): rout
   try {
     const updatedAt = new Date().toISOString()
     data.updatedAt = updatedAt
-    postBookList(data)
+    putDbBook(data,idBook)
   } catch (error) {
     errServer.push('Buku gagal diperbarui')
   }

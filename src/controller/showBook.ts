@@ -20,7 +20,7 @@ export default function showBook(request: IncomingMessage): routersReturnType {
         body: {
           status: 'success',
           data: {
-            books: FILTER_BOOKS,
+            book: FILTER_BOOKS[0],
           },
         },
       }

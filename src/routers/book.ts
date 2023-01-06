@@ -2,6 +2,7 @@ import putBook from "../controller/putBook";
 import postBook from "../controller/postBook";
 import showBook from "../controller/showBook";
 import responseApi from "../utils/response";
+import deleteBook from "../controller/deleteBook";
 
 export default class bookRouters {
   constructor(request: any, response: any) {
@@ -20,7 +21,7 @@ export default class bookRouters {
       },
       {
         method: "DELETE",
-        return: showBook,
+        return: deleteBook,
       },
       {
         method: "",

@@ -60,8 +60,11 @@ export interface routerDataBookTypes {
 export interface data_books {
   books: routerDataBookTypes[]
 }
+export interface data_book {
+  book: routerDataBookTypes
+}
 export interface routerBodyTypes {
-  data?: data_books | routerDataBookTypes
+  data?: data_books | routerDataBookTypes | data_book
   types?: string
   message?: string
   status?: string

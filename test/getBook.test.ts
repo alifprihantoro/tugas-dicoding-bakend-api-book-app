@@ -38,7 +38,7 @@ describe('Test Get APi :', () => {
       .send()
     expect(result.status).toBe(201)
     expect(result.body.status).toBe('success')
-    const firstBook = result.body.data.books[0] as routerDataBookTypes
+    const firstBook = result.body.data.book as routerDataBookTypes
     expect(typeof firstBook.id === 'string').toBe(true)
     expect(typeof firstBook.name === 'string').toBe(true)
     expect(typeof firstBook.year === 'number').toBe(true)

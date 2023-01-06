@@ -1,5 +1,9 @@
 import postApi from './helper/post'
 import putApi from './helper/put'
+import { server } from './server'
+import request from 'supertest'
+import { routerDataBookTypes } from '../src/types/book'
+
 const bodyDefault = {
   name: 'Berubah',
   year: 2010,
@@ -26,25 +30,32 @@ describe('Test update book :', () => {
     const idBook = await postApi().then((data) => data.body.data.bookId)
     await putApi({ ...bodyDefault, readPage: 101 }, idBook).then(({ status, body }) => {
       expect(status).toBe(400)
-      expect(body.message).toBe('Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount')
+      expect(body.message).toBe(
+        'Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount',
+      )
       expect(body.status).toBe('fail')
     })
   })
   it('id notfound', async () => {
-    await putApi( bodyDefault , 'fsaf').then(({ status, body }) => {
+    await putApi(bodyDefault, 'fsaf').then(({ status, body }) => {
       console.log(body)
       expect(status).toBe(400)
       expect(body.message).toBe('Gagal memperbarui buku. Id tidak ditemukan')
       expect(body.status).toBe('fail')
     })
   })
-  it('id notfound', async () => {
+  it('success update', async () => {
     const idBook = await postApi().then((data) => data.body.data.bookId)
-    await putApi( bodyDefault , idBook).then(({ status, body }) => {
-      console.log(body)
+    await putApi(bodyDefault, idBook).then(async ({ status, body }) => {
       expect(status).toBe(201)
       expect(body.message).toBe('Buku berhasil diperbarui')
       expect(body.status).toBe('success')
+      const result = await request(server)
+        .get('/book/' + idBook)
+        .send()
+      console.log(idBook)
+      const firstBook = result.body.data.book as routerDataBookTypes
+      expect(firstBook.name).toBe('Berubah')
     })
   })
 })

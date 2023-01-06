@@ -26,9 +26,6 @@ export default class responseApi {
     let code_: number[] = []
     let body_: routerBodyTypes[] = []
 
-    // show info user get/post on were
-    console.info(this.method + ':' + this.url)
-
     // cek method
     for (let i = 0; i < method.length; i++) {
       // kusus untuk get
