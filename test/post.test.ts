@@ -14,14 +14,14 @@ describe('POST /book => not fail', () => {
       console.log(status)
       console.log(body)
       expect(status).toBe(400)
-      expect(body.msg).toBe('Gagal menambahkan buku. Mohon isi nama buku')
+      expect(body.message).toBe('Gagal menambahkan buku. Mohon isi nama buku')
       expect(body.status).toBe('fail')
     })
   })
   it('jika readPage lebih besar dari pageCount', async () => {
     await postApi({ readPage: 101 }).then(({ status, body }) => {
       expect(status).toBe(400)
-      expect(body.msg).toBe(
+      expect(body.message).toBe(
         'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
       )
       expect(body.status).toBe('fail')

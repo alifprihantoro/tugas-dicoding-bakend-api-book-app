@@ -1,3 +1,4 @@
+import putBook from "../controller/putBook";
 import postBook from "../controller/postBook";
 import showBook from "../controller/showBook";
 import responseApi from "../utils/response";
@@ -15,7 +16,7 @@ export default class bookRouters {
       },
       {
         method: "PUT",
-        return: showBook,
+        return: putBook,
       },
       {
         method: "DELETE",

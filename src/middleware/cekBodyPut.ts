@@ -1,8 +1,20 @@
-import getDbBook from 'utils/getBookList'
+import getDbBook from '../utils/getBookList'
 import { putBody, routerDataBookTypes, routersReturnType } from '../types/book'
 import postBookList from '../utils/postBook'
 
-export default function cekBodyPostBook(data: putBody): routersReturnType {
+export default function cekBodyPostBook(data: putBody, requestUrl: string): routersReturnType {
+  const db = getDbBook() as routerDataBookTypes[]
+  const idBook = requestUrl.replace(/.*\/book\//i, '')
+  const isIdFalid = db.some((data_db) => data_db.id === idBook)
+  if (!isIdFalid) {
+    return {
+      code: 400,
+      body: {
+        status: 'fail',
+        message: 'Gagal memperbarui buku. Id tidak ditemukan',
+      },
+    }
+  }
   const cekData = [
     { name: 'name', type: 'string', require: true },
     { name: 'year', type: 'number', require: true },
@@ -28,18 +40,12 @@ export default function cekBodyPostBook(data: putBody): routersReturnType {
   if (data.readPage > data.pageCount || data.readPage === undefined) {
     errMsg.push('Gagal memperbarui buku. readPage tidak boleh lebih besar dari pageCount')
   }
-  const db = getDbBook() as routerDataBookTypes[]
-  const idBook = data.id
-  const isIdFalid = db.some((data_db) => data_db.id === idBook)
-  if (!isIdFalid) {
-    errMsg.push('Gagal memperbarui buku. Id tidak ditemukan')
-  }
   if (err.length > 0 || errMsg.length > 0) {
     return {
       code: 400,
       body: {
         status: 'fail',
-        msg: errMsg.join('\n'),
+        message: errMsg.join('\n'),
         types: err.join('\n'),
       },
     }
@@ -58,7 +64,7 @@ export default function cekBodyPostBook(data: putBody): routersReturnType {
       code: 500,
       body: {
         status: 'error',
-        msg: errServer[0],
+        message: errServer[0],
       },
     }
   }
@@ -66,7 +72,7 @@ export default function cekBodyPostBook(data: putBody): routersReturnType {
     code: 201,
     body: {
       status: 'success',
-      msg: 'Buku berhasil diperbarui',
+      message: 'Buku berhasil diperbarui',
     },
   }
 }

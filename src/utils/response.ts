@@ -48,14 +48,14 @@ export default class responseApi {
     if (isMethotEmpety) {
       code_.push(404)
       body_.push({
-        msg: `Harap masukkan method saat pengambilan api`,
+        message: `Harap masukkan method saat pengambilan api`,
       })
     }
     const isMethotGood: boolean = code_.toString() === ''
     if (isMethotGood) {
       code_.push(404)
       body_.push({
-        msg: `Halaman tidak dapat diakses dengan ${this.method} request`,
+        message: `Halaman tidak dapat diakses dengan ${this.method} request`,
       })
     }
     this.res.statusCode = code_[0]

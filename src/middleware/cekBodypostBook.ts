@@ -33,7 +33,7 @@ export default function cekBodyPostBook(data: postBook): routersReturnType {
       code: 400,
       body: {
         status: 'fail',
-        msg: errMsg.join('\n'),
+        message: errMsg.join('\n'),
         types: err.join('\n'),
       },
     }
@@ -57,7 +57,7 @@ export default function cekBodyPostBook(data: postBook): routersReturnType {
       code: 500,
       body: {
         status: 'error',
-        msg: 'Buku gagal ditambahkan',
+        message: 'Buku gagal ditambahkan',
       },
     }
   }
@@ -65,7 +65,7 @@ export default function cekBodyPostBook(data: postBook): routersReturnType {
     code: 201,
     body: {
       status: 'success',
-      msg: 'Buku berhasil ditambahkan',
+      message: 'Buku berhasil ditambahkan',
       data: {
         bookId: id,
       },

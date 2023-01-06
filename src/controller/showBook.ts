@@ -1,5 +1,4 @@
 import { IncomingMessage } from 'http'
-import cekUrlRegex from './../utils/cekUrl'
 import { routerDataBookTypes, routersReturnType } from '../types/book'
 import getDbBook from '../utils/getBookList'
 
@@ -30,7 +29,7 @@ export default function showBook(request: IncomingMessage): routersReturnType {
       code: 404,
       body: {
         status: 'fail',
-        msg: 'Buku tidak ditemukan',
+        message: 'Buku tidak ditemukan',
       },
     }
   }

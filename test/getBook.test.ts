@@ -27,7 +27,7 @@ describe('Test Get APi :', () => {
     const result = await request(server).get('/book/sadf').send()
     expect(result.status).toBe(404)
     expect(result.body.status).toBe('fail')
-    expect(result.body.msg).toBe('Buku tidak ditemukan')
+    expect(result.body.message).toBe('Buku tidak ditemukan')
   })
   it('detail found', async () => {
     const idBook = await postApi().then((data) => {

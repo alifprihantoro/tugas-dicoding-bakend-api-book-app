@@ -63,7 +63,7 @@ export interface data_books {
 export interface routerBodyTypes {
   data?: data_books | routerDataBookTypes
   types?: string
-  msg?: string
+  message?: string
   status?: string
 }
 export interface routersType {

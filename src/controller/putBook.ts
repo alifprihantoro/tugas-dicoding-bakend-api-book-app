@@ -6,7 +6,8 @@ export default function putBook(request: IncomingMessage, response?: ServerRespo
   request.on('data', (chunk: any) => {
     const res = response as ServerResponse
     const data = JSON.parse(chunk.toString()) as putBody
-    const cek = cekBodyPut(data)
+    const url:string = request.url as string
+    const cek = cekBodyPut(data, url)
     res.statusCode = cek.code
     res.end(JSON.stringify(cek.body))
   })
