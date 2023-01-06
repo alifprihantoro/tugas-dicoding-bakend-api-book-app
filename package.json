@@ -8,11 +8,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "serve": "nodemon",
-    "dev": "tsc",
-    "production": "",
+    "serve": "tsc && node ./dist/app.js",
+    "dev": "nodemon",
+    "production": "tsc",
     "test": "jest",
-    "lint": "",
     "format": "prettier --config .prettierrc.json --write src/**/*.ts"
   },
   "devDependencies": {
