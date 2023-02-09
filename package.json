@@ -18,11 +18,11 @@
     "@types/jest": "^29.2.0",
     "@types/node": "^18.11.7",
     "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.41.0",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
     "eslint": "^8.0.1",
     "eslint-config-standard": "^17.0.0",
-    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-node": "^11.1.0",
@@ -40,6 +40,7 @@
     "typescript": "*"
   },
   "dependencies": {
+    "@hapi/hapi": "^21.2.1",
     "uuid": "^9.0.0"
   },
   "husky": {
