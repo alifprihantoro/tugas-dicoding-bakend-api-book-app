@@ -1,18 +1,18 @@
-import { notes, notesTypes } from '../notes'
-import { nanoid } from 'nanoid'
+import { notes, notesTypesReq } from '../notes'
+import { Request, ResponseToolkit } from '@hapi/hapi'
 
-interface request {
-  payload: notesTypes
-}
-export const addNoteHandler = (request: request) => {
-  const { title, tags, body } = request.payload
-  const id = nanoid(16)
-  const createdAt = new Date().toISOString()
-  const updatedAt = createdAt
+export const addNoteHandler = (request: Request, h: ResponseToolkit) => {
+  const getReq = request.payload as string
+  const { name, year, author, summary, publisher, pageCount, reading, readPage } = JSON.parse(getReq) as notesTypesReq
+  const id = '142134'
+  const insertedAt = new Date().toISOString()
+  const updatedAt = insertedAt
+  const finished = pageCount === readPage
   const newNote = {
-    title, tags, body, id, createdAt, updatedAt,
+    name, year, author, summary, publisher, pageCount, reading, readPage, id, insertedAt, updatedAt, finished,
   }
+  const isNameUnique = notes.filter((note) => note.id === id).length > 0
   notes.push(newNote)
-  const isSuccess = notes.filter((note) => note.id === id).length > 0
-  return isSuccess
+  const response = h.response({ error: false, message: 'Catatan berhasil ditambahkan' })
+  return response
 }

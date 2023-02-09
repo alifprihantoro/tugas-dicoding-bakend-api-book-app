@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
-    "target": "ES5",
+    "target": "es5",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
+    "typeRoots": [
+      "types",
+      "node_modules/@types"
+    ],
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
     "skipLibCheck": true,
-    "baseUrl": "."
-  }
+    "forceConsistentCasingInFileNames": true
+  },
+  "lib": ["es2015", "dom"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
