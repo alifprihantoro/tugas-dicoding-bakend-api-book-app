@@ -1,5 +1,5 @@
 import Hapi from '@hapi/hapi'
-import { routes } from './routers/post'
+import { routes } from './routers'
 
 const init = async () => {
   const server = Hapi.server({
