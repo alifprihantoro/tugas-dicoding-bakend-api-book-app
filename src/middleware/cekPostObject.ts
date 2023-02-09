@@ -1,13 +1,13 @@
 import { notesTypesReq } from '../notes'
 
-export default function cekPostObject({ name, readPage, pageCount }: notesTypesReq) {
+export default function cekPostObject({ name, readPage, pageCount }: notesTypesReq, METHOD: string) {
   const hasName = name !== undefined && typeof name === 'string'
   if (!hasName) {
     return {
       code: 400,
       body: {
         status: 'fail',
-        message: 'Gagal menambahkan buku. Mohon isi nama buku',
+        message: `Gagal ${METHOD} buku. Mohon isi nama buku`,
       },
     }
   }
@@ -17,7 +17,7 @@ export default function cekPostObject({ name, readPage, pageCount }: notesTypesR
       code: 400,
       body: {
         status: 'fail',
-        message: 'Gagal menambahkan buku. readPage tidak boleh lebih besar dari pageCount',
+        message: `Gagal ${METHOD} buku. readPage tidak boleh lebih besar dari pageCount`,
       },
     }
   }
