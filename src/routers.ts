@@ -1,5 +1,5 @@
 import { addNoteHandler } from './handler/addNote'
-import { getAllNoteHandler } from './handler/getNotes'
+import { getAllNoteHandler } from './handler/getAllNotes'
 
 export const routes = [
   {
