@@ -1,27 +1,11 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
     "module": "commonjs",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    /* Strict Type-Checking Options */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "typeRoots": [
-      "types",
-      "node_modules/@types"
-    ],
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    "baseUrl": "./src",
-    "esModuleInterop": true,
-    /* Advanced Options */
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
-  },
-  "lib": ["es2015", "dom"],
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+    "baseUrl": "."
+  }
 }
