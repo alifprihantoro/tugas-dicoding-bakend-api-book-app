@@ -2,6 +2,7 @@ import { changeBook } from './handler/changeBook'
 import { addNoteHandler } from './handler/addBook'
 import { getAllNoteHandler } from './handler/getAllBooks'
 import { getDetailBook } from './handler/getDetailBook'
+import deleteBook from './handler/deleteBook'
 
 export const routes = [
   {
@@ -38,6 +39,16 @@ export const routes = [
     method: 'GET',
     path: '/books',
     handler: getAllNoteHandler,
+    options: {
+      cors: {
+        origin: ['*'],
+      },
+    },
+  },
+  {
+    method: 'DELETE',
+    path: '/books/{id}',
+    handler: deleteBook,
     options: {
       cors: {
         origin: ['*'],
