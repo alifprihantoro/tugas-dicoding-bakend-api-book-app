@@ -3,9 +3,10 @@ import cekReqUsr from '../middleware/cekReqUsr'
 import { notes, notesTypes } from '../notes'
 
 export const addNoteHandler = (request: Request, h: ResponseToolkit) => {
-  return h.response(cekReqUsr(request, {
-    METHODS: 'Menambah', callBack: (data: notesTypes) => {
+  const { body, code } = cekReqUsr(request, {
+    METHODS: ['ditambahkan', 'menambahkan'], callBack: (data: notesTypes) => {
       notes.push(data)
     },
-  }))
+  })
+  return h.response(body).code(code)
 }

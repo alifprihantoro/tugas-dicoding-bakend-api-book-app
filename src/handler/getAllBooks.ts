@@ -6,12 +6,10 @@ export const getAllNoteHandler = (_: Request, h: ResponseToolkit) => {
     return { id, name, publisher }
   })
   const response = h.response({
-    code: 200, body: {
-      status: 'success',
-      data: {
-        books: LIST_NOTES,
-      },
+    status: 'success',
+    data: {
+      books: LIST_NOTES,
     },
-  })
+  }).code(200)
   return response
 }
