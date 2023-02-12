@@ -3,7 +3,7 @@ import { Request } from '@hapi/hapi'
 import { v4 as uuidv4 } from 'uuid'
 import cekPostObject from '../middleware/cekPostObject'
 interface props {
-  METHODS: string
+  METHODS: string[]
   callBack?: (data: notesTypes) => void
   DATA_PREV?: notesTypes
 }
@@ -11,15 +11,15 @@ export default function cekReqUsr(request: Request, { METHODS, callBack, DATA_PR
   const isRequestGood = request.payload !== undefined && typeof request.payload == 'object'
   if (isRequestGood) {
     const GET_REQ = request.payload
-    const { name, year, author, summary, publisher, pageCount, reading, readPage } = METHODS === 'Menambah' ? GET_REQ as notesTypesReq : DATA_PREV as notesTypes
+    const { name, year, author, summary, publisher, pageCount, reading, readPage } = METHODS[0] === 'ditambahkan' ? GET_REQ as notesTypesReq : DATA_PREV as notesTypes
     const id = uuidv4()
-    const insertedAt = METHODS === 'Menambah' ? new Date().toISOString() : DATA_PREV?.insertedAt as string
-    const updatedAt = METHODS !== 'Menambah' ? new Date().toISOString() : insertedAt
+    const insertedAt = METHODS[0] === 'ditambahkan' ? new Date().toISOString() : DATA_PREV?.insertedAt as string
+    const updatedAt = METHODS[0] !== 'ditambahkan' ? new Date().toISOString() : insertedAt
     const finished = pageCount === readPage
     const newNote = {
       name, year, author, summary, publisher, pageCount, reading, readPage, id, insertedAt, updatedAt, finished,
     }
-    const statusCode = cekPostObject(newNote, METHODS)
+    const statusCode = cekPostObject(newNote, METHODS[1])
     if (statusCode?.code === 400) {
       return statusCode
     }
@@ -27,7 +27,7 @@ export default function cekReqUsr(request: Request, { METHODS, callBack, DATA_PR
     const response = {
       code: 201, body: {
         status: 'success',
-        message: `Buku berhasil ${METHODS}`,
+        message: `Buku berhasil ${METHODS[0]}`,
         data: {
           bookId: id,
         },

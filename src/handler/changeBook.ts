@@ -15,7 +15,7 @@ export const changeBook = (request: Request, h: ResponseToolkit) => {
   })
   if (FOUND_ID_BOOK !== false) {
     return h.response(cekReqUsr(request, {
-      METHODS: 'Mengubah', callBack: () => {
+      METHODS: ['Mengubah', 'diubah'], callBack: () => {
         notes.length = 0
         notes.push(...LIST_NOTES)
       },

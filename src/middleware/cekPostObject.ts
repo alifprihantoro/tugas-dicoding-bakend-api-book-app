@@ -1,7 +1,7 @@
 import { notesTypesReq } from '../notes'
 
 export default function cekPostObject({ name, readPage, pageCount }: notesTypesReq, METHOD: string) {
-  const hasName = name !== undefined && typeof name === 'string'
+  const hasName = name !== undefined && typeof name === 'string' && name.length > 0
   if (!hasName) {
     return {
       code: 400,
