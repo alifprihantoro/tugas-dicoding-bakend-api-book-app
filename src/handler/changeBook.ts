@@ -14,19 +14,18 @@ export const changeBook = (request: Request, h: ResponseToolkit) => {
     return book
   })
   if (FOUND_ID_BOOK !== false) {
-    return h.response(cekReqUsr(request, {
-      METHODS: ['Mengubah', 'diubah'], callBack: () => {
+    const { body, code } = cekReqUsr(request, {
+      METHODS: ['diubah', 'memperbarui'], callBack: () => {
         notes.length = 0
         notes.push(...LIST_NOTES)
       },
       DATA_PREV: request.payload as notesTypes,
-    }))
+    })
+    return h.response(body).code(code)
   }
   const response = h.response({
-    code: 404, body: {
-      status: 'fail',
-      message: 'Gagal memperbarui buku. Id tidak ditemukan',
-    },
-  })
+    status: 'fail',
+    message: 'Gagal memperbarui buku. Id tidak ditemukan',
+  }).code(404)
   return response
 }
