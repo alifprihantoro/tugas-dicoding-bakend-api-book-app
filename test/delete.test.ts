@@ -2,7 +2,7 @@ import { server } from '../src/app'
 import deleteApi from './helper/delete'
 import postApi from './helper/post'
 
-describe('POST /book :', () => {
+describe('DELETE /book :', () => {
   afterAll((done) => {
     server.events.on('stop', () => {
       done()

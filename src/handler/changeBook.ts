@@ -15,13 +15,14 @@ export const changeBook = (request: Request, h: ResponseToolkit) => {
   })
   if (FOUND_ID_BOOK !== false) {
     const { body, code } = cekReqUsr(request, {
-      METHODS: ['diubah', 'memperbarui'], callBack: () => {
+      METHODS: ['diperbarui', 'memperbarui'], callBack: () => {
         notes.length = 0
         notes.push(...LIST_NOTES)
       },
       DATA_PREV: request.payload as notesTypes,
     })
-    return h.response(body).code(code)
+    const CODE = code === 201 ? 200 : code
+    return h.response(body).code(CODE)
   }
   const response = h.response({
     status: 'fail',

@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "serve": "tsc && node ./dist/app.js",
+    "start": "tsc && node ./dist/app.js",
     "dev": "nodemon",
     "production": "tsc",
     "test": "jest",

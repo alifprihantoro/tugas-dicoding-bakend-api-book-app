@@ -2,7 +2,7 @@ import { server } from '../src/app'
 import postApi from './helper/post'
 import putApi from './helper/put'
 
-describe('POST /book :', () => {
+describe('PUT /book :', () => {
   afterAll((done) => {
     server.events.on('stop', () => {
       done()
@@ -12,8 +12,8 @@ describe('POST /book :', () => {
   it('jika di isi benar', async () => {
     const id = await postApi().then(e => e.payload.data.bookId)
     const { payload, statusCode } = await putApi(id)
-    expect(statusCode).toBe(201)
-    expect(payload.message).toBe('Buku berhasil diubah')
+    expect(statusCode).toBe(200)
+    expect(payload.message).toBe('Buku berhasil diperbarui')
     expect(payload.status).toBe('success')
     expect(typeof payload.data.bookId === 'string').toBe(true)
   })

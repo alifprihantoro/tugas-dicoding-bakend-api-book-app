@@ -13,7 +13,7 @@ const body = {
 }
 export default async function putApi(id: string, addBody?: object) {
   const options = {
-    method: 'POST',
+    method: 'PUT',
     url: `/books/${id}`,
     payload: JSON.stringify({ ...body, ...addBody }),
   }

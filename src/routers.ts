@@ -6,7 +6,7 @@ import deleteBook from './handler/deleteBook'
 
 export const routes = [
   {
-    method: 'POST',
+    method: 'PUT',
     path: '/books/{id}',
     handler: changeBook,
     options: {
