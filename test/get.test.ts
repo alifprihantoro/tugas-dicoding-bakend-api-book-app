@@ -28,18 +28,18 @@ describe('Test Get APi :', () => {
     expect(typeof firstBook.name === 'string').toBe(true)
     expect(typeof firstBook.publisher === 'string').toBe(true)
   })
-  it('detail not found', async () => {
+  it('get detail, id not found', async () => {
     const { payload, statusCode } = await getDetailApi('randomid')
     expect(statusCode).toBe(404)
     expect(payload.status).toBe('fail')
     expect(payload.message).toBe('Buku tidak ditemukan')
   })
-  it('detail found', async () => {
+  it('get detail with correct id', async () => {
     const id = await postApi().then(e => {
       return e.payload.data.bookId
     })
     const { payload, statusCode } = await getDetailApi(id)
-    expect(statusCode).toBe(201)
+    expect(statusCode).toBe(200)
     expect(payload.status).toBe('success')
     const firstBook = payload.data.book as notesTypes
     expect(typeof firstBook.id === 'string').toBe(true)

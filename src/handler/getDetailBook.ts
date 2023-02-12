@@ -15,7 +15,7 @@ export const getDetailBook = (request: Request, h: ResponseToolkit) => {
       data: {
         book: notes[GET_INDEX],
       },
-    }).code(201)
+    }).code(200)
     return response
   }
   const response = h.response({

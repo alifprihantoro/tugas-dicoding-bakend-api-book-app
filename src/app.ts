@@ -2,7 +2,7 @@ import Hapi from '@hapi/hapi'
 import { routes } from './routers'
 
 export const server = Hapi.server({
-  port: 5000,
+  port: 9000,
   host: 'localhost',
 })
 const init = async () => {
