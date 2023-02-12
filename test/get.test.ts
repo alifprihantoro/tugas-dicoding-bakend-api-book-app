@@ -39,7 +39,6 @@ describe('Test Get APi :', () => {
       return e.payload.data.bookId
     })
     const { payload, statusCode } = await getDetailApi(id)
-    console.log(payload)
     expect(statusCode).toBe(201)
     expect(payload.status).toBe('success')
     const firstBook = payload.data.book as notesTypes

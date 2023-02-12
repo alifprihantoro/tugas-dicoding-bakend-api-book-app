@@ -11,11 +11,9 @@ export default function deleteBook(request: Request, h: ResponseToolkit) {
   })
   if (typeof DELETE_INDEX === 'number') {
     const response = h.response({
-      code: 404, body: {
-        status: 'fail',
-        message: 'Buku gagal dihapus. Id tidak ditemukan',
-      },
-    })
+      status: 'success',
+      message: 'Buku berhasil dihapus',
+    }).code(200)
     if (DELETE_INDEX === 0) {
       notes.splice(DELETE_INDEX, DELETE_INDEX + 1)
       return response
@@ -24,9 +22,7 @@ export default function deleteBook(request: Request, h: ResponseToolkit) {
     return response
   }
   return h.response({
-    code: 404, body: {
-      status: 'fail',
-      message: 'Buku gagal dihapus. Id tidak ditemukan',
-    },
-  })
+    status: 'fail',
+    message: 'Buku gagal dihapus. Id tidak ditemukan',
+  }).code(404)
 }
