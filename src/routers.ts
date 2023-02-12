@@ -6,7 +6,7 @@ import { getDetailBook } from './handler/getDetailBook'
 export const routes = [
   {
     method: 'POST',
-    path: '/notes/{id}',
+    path: '/books/{id}',
     handler: changeBook,
     options: {
       cors: {
@@ -16,7 +16,7 @@ export const routes = [
   },
   {
     method: 'POST',
-    path: '/notes',
+    path: '/books',
     handler: addNoteHandler,
     options: {
       cors: {
@@ -26,7 +26,7 @@ export const routes = [
   },
   {
     method: 'GET',
-    path: '/notes/{id}',
+    path: '/books/{id}',
     handler: getDetailBook,
     options: {
       cors: {
@@ -36,7 +36,7 @@ export const routes = [
   },
   {
     method: 'GET',
-    path: '/notes',
+    path: '/books',
     handler: getAllNoteHandler,
     options: {
       cors: {
