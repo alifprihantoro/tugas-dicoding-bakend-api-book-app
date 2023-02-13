@@ -4,12 +4,12 @@ import cekReqUsr from '../middleware/cekReqUsr'
 
 export const changeBook = (request: Request, h: ResponseToolkit) => {
   const GET_ID = request.params.id
-  const { name, pageCount, readPage } = request.payload as notesTypesReq
+  const { name, pageCount, readPage, year, author, summary, publisher } = request.payload as notesTypesReq
   let FOUND_ID_BOOK: boolean | number = false
   const LIST_NOTES = notes.map((book, i) => {
     if (book.id === GET_ID) {
       FOUND_ID_BOOK = i
-      return { ...book, name, pageCount, readPage }
+      return { ...book, name, pageCount, readPage, year, author, summary, publisher }
     }
     return book
   })
