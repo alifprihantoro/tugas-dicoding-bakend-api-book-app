@@ -18,7 +18,7 @@ This project uses the following technologies:
 
 To install this project, follow these steps:
 
-1. Clone this repository: `git clone git@github.com:alifprihantoro/tugas-dicoding-bakend-api-book-app.git`
+1. Clone this repository: `git clone https://github.com/alifprihantoro/tugas-dicoding-bakend-api-book-app.git`
 2. Install the dependencies: `npm install`
 3. Compile the TypeScript files: `npm run production`
 
